@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _JJUGGUMI_H_
 #define _JJUGGUMI_H_
 
@@ -9,11 +10,12 @@
 bool player[PLAYER_MAX];  // 기본값 true, 탈락하면 false
 int n_player, n_alive;
 int tick;  // 시계
+int ending_choice;
+int clear_player;
 
 // 미니게임
-void sample(void);
-//void mugunghwa(void);
-//void mugunghwa(void);
+void start(void);
+void mugunghwa(void);
 //void nightgame(void);
 //void juldarigi(void);
 //void jebi(void);

@@ -21,6 +21,7 @@ void printxy(char ch, int row, int col) {
 	printf("%c", ch);
 }
 
+// map 만드는 코드 / (13,6)
 void map_init(int n_row, int n_col) {
 	// 두 버퍼를를 완전히 비우기
 	for (int i = 0; i < ROW_MAX; i++) {
@@ -72,10 +73,41 @@ void draw(void) {
 void print_status(void) {
 	printf("no. of players left: %d\n", n_alive);
 	for (int p = 0; p < n_player; p++) {
-		printf("player %2d: %5s\n", p, player[p] ? "alive" : "DEAD");		
+		printf("player %2d: %5s\n", p, player[p] ? "alive" : "DEAD");
 	}
 }
 
 void dialog(char message[]) {
+	char f_buf[ROW_MAX][COL_MAX] = { 0 };
 
+	for (int row = 0; row < ROW_MAX; row++) {
+		for (int col = 0; col < COL_MAX; col++) {
+			f_buf[row][col] = back_buf[row][col];
+		}
+	}
+
+	for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
+		gotoxy(5, 12);
+		printf("*************************");
+		gotoxy(6, 12);
+		printf("*%d%s*", i, message);
+		gotoxy(7, 12);
+		printf("*************************");
+		Sleep(1000);
+	}
+
+	for (int row = 0; row < ROW_MAX; row++) {
+		for (int col = 0; col < COL_MAX; col++) {
+			front_buf[row][col] = ' ';
+		}
+	}
+	system("cls");
+
+
+	for (int row = 0; row < ROW_MAX; row++) {
+		for (int col = 0; col < COL_MAX; col++) {
+			back_buf[row][col] = f_buf[row][col];
+		}
+	}
+	display();
 }

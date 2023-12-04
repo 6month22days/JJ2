@@ -29,7 +29,10 @@
     <ClCompile Include="keyin.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="sample.c">
+    <ClCompile Include="start.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="mugunghwa.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
