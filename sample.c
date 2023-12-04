@@ -109,4 +109,4 @@ void sample(void) {
 		Sleep(10);
 		tick += 10;
 	}
-}
+}//123456789
