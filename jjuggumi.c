@@ -20,19 +20,45 @@ int randint(int low, int high) {
 	return rnum;
 }
 
-// 플레이어 수 입력
-int jjuggumi_init(void) {
-	srand((unsigned int)time(NULL));
 
-	printf("플레이어 수: ");
-	scanf_s("%d", &n_player);
-
-	n_alive = n_player;
-	for (int i = 0; i < n_player; i++) {
-		player[i] = true;
-	}
-	system("cls");
-	return 0;
+// 아이템,플레이어
+int jjuggumi_init() {
+				srand((unsigned int)time(NULL)); 
+				FILE* fp; fopen_s(&fp, DATA_FILE, "r"); 
+				if (fp == NULL) {
+					return -1;// -1 리턴하면메인함수에서처리하고종료
+				}
+				
+				// 플레이어데이터load
+				fscanf_s(fp, "%d", &n_player);
+				n_alive = n_player;
+				for (int i= 0; i< n_player; i++) {
+								// 아직안배운문법(구조체포인터, 간접참조연산자)
+								PLAYER* p = &player[i];
+								
+								// 파일에서각스탯최댓값읽기
+								fscanf_s(fp, "%s%d%d",
+												p->name, (unsigned int)sizeof(p->name),
+												&(p->intel), &(p->str));
+								p->stamina = 100; // 100%
+								
+								// 현재상태
+								p->is_alive= true;
+								p->hasitem= false;
+				}
+				
+				// 아이템데이터load
+				fscanf_s(fp, "%d", &n_item);
+				for (int i= 0; i< n_item; i++) {
+								fscanf_s(fp, "%s%d%d%d",
+												item[i].name, (unsigned int)sizeof(item[i].name),
+												&(item[i].intel_buf),
+												&(item[i].str_buf),
+												&(item[i].stamina_buf));
+				}
+				
+				fclose(fp);
+				return 0;
 }
 
 //오프닝
@@ -82,11 +108,11 @@ void intro(void) {
 
 //엔딩
 void ending(void) {
-	//우승자 출력
+	//q로 종료
 	if (ending_choice == 1 || clear_player > 1) {
 		system("cls");
 		for (int i = 0; i < n_player; i++) {
-			if (player[i]) {
+			if (player[i].is_alive) {
 				i++;
 			}
 		}
@@ -94,20 +120,20 @@ void ending(void) {
 		printf("살아남은 플레이어 : ");
 
 		for (int i = 0; i < n_player; i++) {
-			if (player[i]) {
+			if (player[i].is_alive) {
 				printf(" %d", i);
 			}
 		}
 	}
 
-	//q로 종료
+	//우승자 출력
 	else {
 		system("cls");
 
 		printf("***** 환영합니다. *****\n");
 
 		for (int i = 0; i < n_player; i++) {
-			if (player[i]) {
+			if (player[i].is_alive) {
 				printf(" %d번 당신의 우승을 축하합니다. \n", i);
 			}
 		}
@@ -134,7 +160,7 @@ void ending(void) {
 void stop(void) {
 	system("cls");
 	for (int i = 0; i < n_player; i++) {
-		if (player[i]) {
+		if (player[i].is_alive) {
 			i++;
 		}
 	}
@@ -142,7 +168,7 @@ void stop(void) {
 	printf("살아남은 플레이어 : ");
 
 	for (int i = 0; i < n_player; i++) {
-		if (player[i]) {
+		if (player[i].is_alive) {
 			printf(" %d", i);
 		}
 	}

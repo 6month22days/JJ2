@@ -94,7 +94,7 @@ void tick_mugunghwa(void) {
 		tick = 0;
 	}		// player 1 부터는 랜덤으로 움직임(3방향)
 	for (int i = 1; i < n_player; i++) {
-		if (player[i] == false) {
+		if (player[i].is_alive == false) {
 			continue;
 		}
 		if (tick % period[i] == 0) {
@@ -114,7 +114,7 @@ void tick_mugunghwa(void) {
 					if (a == 1) {
 						continue;
 					}
-					player[i] = false;
+					player[i].is_alive = false;
 					n_alive--;
 					dead_player[i] = 1;
 				}
@@ -175,7 +175,7 @@ void move_manual_M(key_t key) {
 		return;
 	}
 
-	if (player[0] == false) {
+	if (player[0].is_alive == false) {
 		return;
 	}
 
@@ -187,7 +187,7 @@ void move_manual_M(key_t key) {
 				return;
 			}
 		}
-		player[0] = false;
+		player[0].is_alive = false;
 		n_alive--;
 		dead_player[0] = 1;
 	}
