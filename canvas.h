@@ -18,6 +18,7 @@ char back_buf[ROW_MAX][COL_MAX];
 char f_buf[ROW_MAX][COL_MAX];
 // 맵 크기(위의 buf는 텍스트까지 포함한 캔버스 크기)
 int N_ROW, N_COL;
+int juldarigi_play;
 
 void map_init(int n_row, int n_col);
 void dialog(char message[]);

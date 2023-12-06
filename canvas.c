@@ -72,12 +72,18 @@ void draw(void) {
 
 void print_status(void) {
 	printf("no. of players left: %d\n", n_alive);
-	printf("%24s %9s %7s\n", "intl","str","stm");
-
-	for (int p = 0; p < n_player; p++) {
-		printf("player %2d: %5s %5d(%s%d) %5d(%s%d) %5d%%\n", p, player[p].is_alive ? "alive" : "DEAD",
-			player[p].intel, (player[p].item.intel_buf >= 0) ? "+" : "", player[p].item.intel_buf,
-			player[p].str, (player[p].item.str_buf >= 0) ? "+" : "", player[p].item.str_buf, player[p].stamina);
+	if (juldarigi_play == 0) {
+		printf("%24s %9s %7s\n", "intl", "str", "stm");
+		for (int p = 0; p < n_player; p++) {
+			printf("player %2d: %5s %5d(%s%d) %5d(%s%d) %5d%%\n", p, player[p].is_alive ? "alive" : "DEAD",
+				player[p].intel, (player[p].item.intel_buf >= 0) ? "+" : "", player[p].item.intel_buf,
+				player[p].str, (player[p].item.str_buf >= 0) ? "+" : "", player[p].item.str_buf, player[p].stamina);
+		}
+	}
+	else if (juldarigi_play == 1) {
+		for (int p = 0; p < n_player; p++) {
+			printf("player %2d: %5s\n", p, player[p].is_alive ? "alive" : "alive*");
+		}
 	}
 }
 
