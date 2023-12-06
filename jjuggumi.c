@@ -183,8 +183,8 @@ int main(void) {
 	//start();
 	//mugunghwa();
 	//nightgame();
-	juldarigi();
-	//jebi();
+	//juldarigi();
+	jebi();
 	//ending();
 	return 0;
 }
