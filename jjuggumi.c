@@ -13,6 +13,9 @@
 
 int jjuggumi_init(void);
 void intro(void);
+void ending(void);
+void stop(void);
+int randint(int low, int high);
 
 // low 이상 high 이하 난수를 발생시키는 함수
 int randint(int low, int high) {
@@ -177,11 +180,11 @@ void stop(void) {
 int main(void) {
 	//intro();
 	jjuggumi_init();
-	start();
-	mugunghwa();
+	//start();
+	//mugunghwa();
 	//nightgame();
-	//juldarigi();
+	juldarigi();
 	//jebi();
-	ending();
+	//ending();
 	return 0;
 }

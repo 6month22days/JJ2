@@ -44,7 +44,7 @@ int clear_player;
 void start(void);
 void mugunghwa(void);
 //void nightgame(void);
-//void juldarigi(void);
+void juldarigi(void);
 //void jebi(void);
 
 int randint(int low, int high);
