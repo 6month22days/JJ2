@@ -45,7 +45,7 @@ void start(void);
 void mugunghwa(void);
 //void nightgame(void);
 void juldarigi(void);
-//void jebi(void);
+void jebi(void);
 
 int randint(int low, int high);
 
