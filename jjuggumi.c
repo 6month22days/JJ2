@@ -180,8 +180,8 @@ void stop(void) {
 int main(void) {
 	//intro();
 	jjuggumi_init();
-	//start();
-	//mugunghwa();
+	start();
+	mugunghwa();
 	//nightgame();
 	juldarigi();
 	//jebi();
