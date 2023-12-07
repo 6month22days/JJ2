@@ -1,13 +1,15 @@
 #include "jjuggumi.h"
 #include "canvas.h"
 #include "keyin.h"
-#include <stdio.h>
+#include <stdio.h> //      지금 제비에서 할 것들 : 1. 라운드마다 플레이어 표기, 2. 산 사람 구분, 3. 사람 죽이기
 
 #define DIR_LEFT	2
 #define DIR_RIGHT	3
 #define DIR_SPACE	4
 
 int px[PLAYER_MAX], py[PLAYER_MAX], period[PLAYER_MAX];
+
+int dead_player[PLAYER_MAX] = { 0 };
 
 void jebi_init();
 void jebi();
@@ -30,7 +32,14 @@ void jebi_shuf(void) {
 		dialog(2,"pass");
 	}
 	else {
-		dialog(2,"dead");
+		for (int i = 0; i < n_player; i++) {
+			if (dead_player[i] == 1) {
+				back_buf[px[i]][py[i]] = ' ';
+				//탈락 플레이어 dialog로  나타냄
+				dialog(2, "dead");
+				dead_player[i] = 0;
+			}
+		}
 	}
 }
 
@@ -95,6 +104,7 @@ bool placable_J(int row, int col) {
 }
 
 void jebi() {
+	// while (n_alive == 1) {} // - 한명 남을때까지 반복시키기
 	jebi_init();
 	system("cls");
 	display();
