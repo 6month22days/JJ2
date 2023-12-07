@@ -39,6 +39,8 @@ int n_player, n_alive, n_item;
 int tick;  // 시계
 int ending_choice;
 int clear_player;
+int die_player;
+
 
 // 미니게임
 void start(void);

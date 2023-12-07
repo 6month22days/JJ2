@@ -165,8 +165,8 @@ void move_manual_M(key_t key) {
 	case K_DOWN: dir = 1; break;
 	case K_LEFT: dir = 2; break;
 	case K_RIGHT: dir = 3; break;
-		//case 'q': stop();
-	default: return;
+	default:
+		return;
 	}
 	int nx, ny;
 	nx = px[0] + dx[dir];
