@@ -86,7 +86,7 @@ void tick_mugunghwa(void) {
 				//탈락 플레이어 dialog로  나타냄
 				char dead[] = "   player d dead!     ";
 				dead[10] = i + '0';
-				dialog(dead);
+				dialog(1,dead);
 				dead_player[i] = 0;
 			}
 		}

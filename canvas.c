@@ -87,7 +87,7 @@ void print_status(void) {
 	}
 }
 
-void dialog(char message[]) {
+void dialog(int a,char message[]) {
 	char f_buf[ROW_MAX][COL_MAX] = { 0 };
 
 	for (int row = 0; row < ROW_MAX; row++) {
@@ -96,14 +96,38 @@ void dialog(char message[]) {
 		}
 	}
 
-	for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
-		gotoxy(5, 12);
-		printf("*************************");
-		gotoxy(6, 12);
-		printf("*%d%s*", i, message);
-		gotoxy(7, 12);
-		printf("*************************");
-		Sleep(1000);
+	if (a == 0) { // -- 샘플 다이어로그
+		for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
+			gotoxy(4, 10);
+			printf("*************************");
+			gotoxy(5, 10);
+			printf("*%d%s*", i, message);
+			gotoxy(6, 10);
+			printf("*************************");
+			Sleep(1000);
+		}
+	}
+	else if (a == 1) { // -- 무궁화 다이어로그
+		for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
+			gotoxy(4, 10);
+			printf("*************************");
+			gotoxy(5, 10);
+			printf("*%d%s*", i, message);
+			gotoxy(6, 10);
+			printf("*************************");
+			Sleep(1000);
+		}
+	}
+	else if (a == 2) { //-- 제비 다이어로그
+		for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
+			gotoxy(3, 4);
+			printf("***********");
+			gotoxy(4, 4);
+			printf("*  %d%s  *", i, message);
+			gotoxy(5, 4);
+			printf("***********");
+			Sleep(1000);
+		}
 	}
 
 	for (int row = 0; row < ROW_MAX; row++) {

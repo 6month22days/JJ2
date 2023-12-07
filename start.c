@@ -110,7 +110,7 @@ void start(void) {
 		Sleep(10);
 		tick += 10;
 		if (tick % 3000 == 0) {
-			dialog("초후 게임이 시작됩니다");
+			dialog(0,"초후 게임이 시작됩니다");
 			break;
 		}
 	}

@@ -16,17 +16,22 @@ void move_manual_J(key_t key);
 void move_tail_J(int player, int nx, int ny);
 bool placable_J(int row, int col);
 
-void jebi_suf(void);
+void jebi_shuf(void);
+void jebi_pick(void);
 
-void jebi_suf(void) {
+void jebi_pick(void) {
+	char str2[50];
+}
+
+
+void jebi_shuf(void) {
 	int a = randint(1, n_alive);
 	if (a == 1) {
-		printf("실패");
+		dialog(2,"pass");
 	}
 	else {
-		printf("통과");
+		dialog(2,"dead");
 	}
-	
 }
 
 void jebi_init() {
@@ -41,7 +46,7 @@ void jebi_init() {
 	back_buf[px[0]][py[0]] = '@';
 }
 
-void print_status_J() { // round 올리기
+void print_status_J() { // round 올리기, 해당 라운드 플레이어 이름 출력
 	gotoxy(N_ROW, 0);
 	int n = 1;
 	printf("round %d, turn: player %d", n, n_alive);
@@ -101,9 +106,9 @@ void jebi() {
 		if (key == K_QUIT) {
 			break;
 		}
-		//else if (key == K_SPACE) { -- 함수 만들어 넣기
-
-		//}
+		else if (key == K_SPACE) {
+			jebi_shuf();
+		}
 		else if (key != K_UNDEFINED) {
 			move_manual_J(key);
 		}
