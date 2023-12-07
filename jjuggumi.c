@@ -178,13 +178,13 @@ void stop(void) {
 }
 
 int main(void) {
-	//intro();
+	intro();
 	jjuggumi_init();
 	start();
 	mugunghwa();
 	//nightgame();
 	juldarigi();
-	//jebi();
-	//ending();
+	jebi();
+	ending();
 	return 0;
 }

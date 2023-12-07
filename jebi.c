@@ -108,6 +108,7 @@ bool placable_J(int row, int col) {
 }
 
 void jebi() {
+	juldarigi_play = 0;
 	// while (n_alive == 1) {} // - 한명 남을때까지 반복시키기
 	jebi_init();
 	system("cls");
