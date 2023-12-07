@@ -87,7 +87,7 @@ void print_status(void) {
 	}
 }
 
-void dialog(int a,char message[]) {
+void dialog(int n,char message[]) {
 	char f_buf[ROW_MAX][COL_MAX] = { 0 };
 
 	for (int row = 0; row < ROW_MAX; row++) {
@@ -96,7 +96,7 @@ void dialog(int a,char message[]) {
 		}
 	}
 
-	if (a == 0) { // -- 샘플 다이어로그
+	if (n == 0) { // -- 샘플 다이어로그
 		for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
 			gotoxy(4, 10);
 			printf("*************************");
@@ -107,7 +107,7 @@ void dialog(int a,char message[]) {
 			Sleep(1000);
 		}
 	}
-	else if (a == 1) { // -- 무궁화 다이어로그
+	else if (n == 1) { // -- 무궁화 다이어로그
 		for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
 			gotoxy(4, 10);
 			printf("*************************");
@@ -118,17 +118,23 @@ void dialog(int a,char message[]) {
 			Sleep(1000);
 		}
 	}
-	else if (a == 2) { //-- 제비 다이어로그
+	else if (n == 2) { //-- 제비 다이어로그
 		for (int i = DIALOG_DURATION_SEC; i >= 1; i--) {
 			gotoxy(3, 4);
-			printf("***********");
+			printf("**********************");
 			gotoxy(4, 4);
-			printf("*  %d%s  *", i, message);
+			for (int p = 0; p < n_player; p++) {
+				if (player[p].is_alive) {
+					printf("*  %d %s %d %s  *", i, "player", p, message);
+					break;
+				}
+			}
 			gotoxy(5, 4);
-			printf("***********");
+			printf("**********************");
 			Sleep(1000);
 		}
 	}
+
 
 	for (int row = 0; row < ROW_MAX; row++) {
 		for (int col = 0; col < COL_MAX; col++) {
@@ -143,5 +149,6 @@ void dialog(int a,char message[]) {
 			back_buf[row][col] = f_buf[row][col];
 		}
 	}
+
 	display();
 }
