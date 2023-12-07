@@ -9,8 +9,6 @@
 
 int px[PLAYER_MAX], py[PLAYER_MAX], period[PLAYER_MAX];
 
-int dead_player[PLAYER_MAX] = { 0 };
-
 void jebi_init();
 void jebi();
 void print_status_J(void);
@@ -32,14 +30,7 @@ void jebi_shuf(void) {
 		dialog(2,"pass");
 	}
 	else {
-		for (int i = 0; i < n_player; i++) {
-			if (dead_player[i] == 1) {
-				back_buf[px[i]][py[i]] = ' ';
-				//Å»¶ô ÇÃ·¹ÀÌ¾î dialog·Î  ³ªÅ¸³¿
-				dialog(2, "dead");
-				dead_player[i] = 0;
-			}
-		}
+		dialog(2,"dead");
 	}
 }
 
