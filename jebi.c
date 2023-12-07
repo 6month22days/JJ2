@@ -1,7 +1,7 @@
 #include "jjuggumi.h"
 #include "canvas.h"
 #include "keyin.h"
-#include <stdio.h> //      지금 제비에서 할 것들 : 1. 라운드마다 플레이어 표기, 2. 산 사람 구분, 3. 사람 죽이기
+#include <stdio.h> // 지금 제비에서 할 것들 : 1. 라운드마다 플레이어 표기, 2. 산 사람 구분, 3. 사람 죽이기
 
 #define DIR_LEFT	2
 #define DIR_RIGHT	3
@@ -16,29 +16,38 @@ void move_manual_J(key_t key);
 void move_tail_J(int player, int nx, int ny);
 bool placable_J(int row, int col);
 
+int round = 1;
+int b = 0;
+
 void jebi_shuf(void);
-void jebi_pick(void);
-
-void jebi_pick(void) {
-	char str2[50];
-}
-
 
 void jebi_shuf(void) {
 	int a = randint(1, n_alive);
-	if (a == 1) {
-		dialog(2,"pass");
+	if (a == 1) { // -- pass
+		dialog(2,"pass!");
+		b++;
 	}
-	else {
-		dialog(2,"dead");
+	else { // -- fail
+		round++;
+		dialog(2, "fail!");
+		for (int i = b; i < n_player; i++) {
+			if (player[i].is_alive) {
+				player[i].is_alive = false;
+				n_alive--;
+				break;
+			}
+			if (player[i].is_alive == 1) {
+				return; // - 이렇게 하면 겜 바로 끝나나?
+			}
+		}
 	}
 }
 
+ 
 void jebi_init() {
 	map_init(9, 20);
 	for (int i = 0; i < n_alive; i++) {
 		// 같은 자리가 나오면 다시 생성
-
 		back_buf[4][4 + 2 * i] = '?';
 	}
 	px[0] = 4;
@@ -47,9 +56,13 @@ void jebi_init() {
 }
 
 void print_status_J() { // round 올리기, 해당 라운드 플레이어 이름 출력
-	gotoxy(N_ROW, 0);
-	int n = 1;
-	printf("round %d, turn: player %d", n, n_alive);
+	gotoxy(10, 0);
+	for (int i = 0; i < n_player; i++) {
+		if (player[i].is_alive) {
+			printf("round %d, turn: player %d", round, i);
+			break;
+		}
+	}
 }
 
 void move_manual_J(key_t key) {
@@ -100,8 +113,9 @@ void jebi() {
 	system("cls");
 	display();
 
-	print_status_J();
+
 	while (1) {
+		print_status_J();
 		// player 0만 손으로 움직임(4방향)
 		key_t key = get_key();
 		if (key == K_QUIT) {
@@ -113,7 +127,6 @@ void jebi() {
 		else if (key != K_UNDEFINED) {
 			move_manual_J(key);
 		}
-
 		display();
 		Sleep(10);
 		tick += 10;
